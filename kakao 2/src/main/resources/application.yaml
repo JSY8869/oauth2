@@ -1,0 +1,51 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-name: kakao
+            client-id: ae8eaab19e6b5ffcd2f245bd18b06d79
+            client-secret: enOvkkueEqvy0EVFTwCtyE4HErCXMT27
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - profile_image
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-name-attribute: id
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/kakao-admin-dev?createDatabaseIfNotExist=true
+    username: root
+    password: 11111111
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+---
+app:
+  auth:
+    token-secret: devbeekeitokensecretkeydsfjeiwqwnktntewiogndvaksdsfjkjqwioehntklnklaesngvklnvjniokasgjioda
+    token-expiration-time: 1209600000
+  oauth2:
+    authorized-redirect-uris:
+      - http://localhost:8080/auth/token
+
+JWT_REFRESH_SECRET_KEY: "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
+JWT_SECRET_KEY: "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789"
